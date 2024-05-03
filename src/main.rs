@@ -1,9 +1,16 @@
 use bevy::prelude::*;
 
 fn main() {
-    App::new().add_systems(Startup, hello_world).run()
+    App::new().add_systems(Startup, setup).run()
 }
 
-pub fn hello_world() {
-    println!("Hello world")
+pub fn setup(mut commands: Commands) {
+    commands.spawn(Person {
+        name: "Alex".to_string(),
+    });
+}
+
+#[derive(Component)]
+pub struct Person {
+    pub name: String,
 }
