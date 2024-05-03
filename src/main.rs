@@ -8,18 +8,29 @@ fn main() {
 }
 
 pub fn setup(mut commands: Commands) {
-    commands.spawn(Person {
-        name: "Alex".to_string(),
-    });
-    commands.spawn(Person {
-        name: "Bob".to_string(),
-    });
-    commands.spawn(Person {
-        name: "Sylvain".to_string(),
-    });
-    commands.spawn(Person {
-        name: "Mathiew".to_string(),
-    });
+    commands.spawn((
+        Person {
+            name: "Alex".to_string(),
+        },
+        Employed { job: Job::Doctor },
+    ));
+    commands.spawn((
+        Person {
+            name: "Bob".to_string(),
+        },
+        Employed { job: Job::Lawyer },
+    ));
+    commands.spawn((
+        Person {
+            name: "Sylvain".to_string(),
+        },
+        Employed {
+            job: Job::FireFighter,
+        },
+    ));
+    commands.spawn((Person {
+        name: "Mathew".to_string(),
+    },));
 }
 
 pub fn print_names(person_query: Query<&Person>) {
@@ -31,4 +42,16 @@ pub fn print_names(person_query: Query<&Person>) {
 #[derive(Component)]
 pub struct Person {
     pub name: String,
+}
+
+#[derive(Component)]
+pub struct Employed {
+    pub job: Job,
+}
+
+#[derive(Debug)]
+pub enum Job {
+    Doctor,
+    FireFighter,
+    Lawyer,
 }
