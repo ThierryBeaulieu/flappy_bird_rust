@@ -11,6 +11,15 @@ pub fn setup(mut commands: Commands) {
     commands.spawn(Person {
         name: "Alex".to_string(),
     });
+    commands.spawn(Person {
+        name: "Bob".to_string(),
+    });
+    commands.spawn(Person {
+        name: "Sylvain".to_string(),
+    });
+    commands.spawn(Person {
+        name: "Mathiew".to_string(),
+    });
 }
 
 pub fn print_names(person_query: Query<&Person>) {
