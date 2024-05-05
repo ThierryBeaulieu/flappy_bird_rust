@@ -19,6 +19,7 @@ fn main() {
         .init_resource::<Score>()
         .init_resource::<StarSpawnTimer>()
         .init_resource::<EnemySpawnTimer>()
+        .init_resource::<HighScores>()
         .add_event::<GameOver>()
         .add_systems(Startup, spawn_player)
         .add_systems(Startup, spawn_camera)
@@ -37,6 +38,8 @@ fn main() {
         .add_systems(Update, tick_enemy_spawn_timer)
         .add_systems(Update, spawn_enemies_over_time)
         .add_systems(Update, exit_game)
+        .add_systems(Update, handle_game_over)
+        .add_systems(Update, update_high_scores)
         .run()
 }
 
@@ -90,6 +93,17 @@ impl Default for EnemySpawnTimer {
         EnemySpawnTimer {
             timer: Timer::from_seconds(ENEMY_SPAWN_TIME, TimerMode::Repeating),
         }
+    }
+}
+
+#[derive(Resource, Debug)]
+pub struct HighScores {
+    pub scores: Vec<(String, u32)>,
+}
+
+impl Default for HighScores {
+    fn default() -> HighScores {
+        HighScores { scores: Vec::new() }
     }
 }
 
@@ -440,5 +454,26 @@ pub fn exit_game(
 ) {
     if keyboard_input.just_pressed(KeyCode::Escape) {
         app_exit_event_writer.send(AppExit);
+    }
+}
+
+pub fn handle_game_over(mut game_over_event_reader: EventReader<GameOver>) {
+    for event in game_over_event_reader.read() {
+        println!("Your final score is : {}", event.score.to_string());
+    }
+}
+
+pub fn update_high_scores(
+    mut game_over_event_reader: EventReader<GameOver>,
+    mut high_scores: ResMut<HighScores>,
+) {
+    for event in game_over_event_reader.read() {
+        high_scores.scores.push(("Player".to_string(), event.score));
+    }
+}
+
+pub fn high_scores_updated(high_scores: Res<HighScores>) {
+    if high_scores.is_changed() {
+        println!("High Scores: {:?}", high_scores);
     }
 }
