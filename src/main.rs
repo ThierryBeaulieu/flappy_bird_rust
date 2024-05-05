@@ -40,6 +40,7 @@ fn main() {
         .add_systems(Update, exit_game)
         .add_systems(Update, handle_game_over)
         .add_systems(Update, update_high_scores)
+        .add_systems(Update, high_scores_updated)
         .run()
 }
 
