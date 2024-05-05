@@ -15,6 +15,7 @@ fn main() {
         .add_systems(Startup, spawn_camera)
         .add_systems(Startup, spawn_enemies)
         .add_systems(Update, player_movement)
+        .add_systems(Update, update_enemy_direction)
         .add_systems(Update, confine_player_movement)
         .add_systems(Update, enemy_movement)
         .run()
