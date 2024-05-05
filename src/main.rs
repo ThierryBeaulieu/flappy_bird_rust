@@ -208,8 +208,8 @@ pub fn update_enemy_direction(
         // Play SFX
         if direction_changed {
             // Play Sound Effect
-            let sound_effect_1 = asset_server.load("audio/pluck_001.ogg");
-            let sound_effect_2 = asset_server.load("audio/pluck_002.ogg");
+            let sound_effect_1 = asset_server.load("audio/impactSoft_heavy_000.ogg");
+            let sound_effect_2 = asset_server.load("audio/impactSoft_heavy_004.ogg");
 
             if random::<f32>() > 0.5 {
                 commands.spawn(AudioBundle {
