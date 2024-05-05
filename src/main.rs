@@ -183,7 +183,7 @@ pub fn confine_enemy_movement(
     let y_min = 0.0 + half_enemy_size;
     let y_max = window.height() - half_enemy_size;
 
-    for (mut transform) in enemy_query.iter_mut() {
+    for mut transform in enemy_query.iter_mut() {
         let mut translation = transform.translation;
 
         // Bound the enemy x position
