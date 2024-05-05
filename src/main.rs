@@ -6,13 +6,14 @@ pub const PLAYER_SIZE: f32 = 54.0; // This is the player sprite size
 pub const PLAYER_SPEED: f32 = 500.0;
 pub const NUMBER_OF_ENEMIES: usize = 5;
 pub const ENEMY_SPEED: f32 = 200.0;
-pub const ENEMY_SIZE: f32 = 64.0;
+pub const ENEMY_SIZE: f32 = 64.0; // This is the enemy sprite size
 pub const NUMBER_OF_STARS: usize = 10;
-pub const STAR_SIZE: f32 = 30.0;
+pub const STAR_SIZE: f32 = 30.0; // This is the star sprite size
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .init_resource::<Score>()
         .add_systems(Startup, spawn_player)
         .add_systems(Startup, spawn_camera)
         .add_systems(Startup, spawn_enemies)
@@ -24,6 +25,7 @@ fn main() {
         .add_systems(Update, enemy_movement)
         .add_systems(Update, enemy_hit_player)
         .add_systems(Update, player_hit_star)
+        .add_systems(Update, update_score)
         .run()
 }
 
@@ -37,6 +39,22 @@ pub struct Enemy {
 
 #[derive(Component)]
 pub struct Star {}
+
+#[derive(Resource)]
+pub struct Score {
+    pub value: u32,
+}
+
+impl Default for Score {
+    fn default() -> Score {
+        Score { value: 0 }
+    }
+}
+
+#[derive(Resource)]
+pub struct StarSpawnTimer {
+    pub timer: Timer,
+}
 
 pub fn spawn_player(
     mut commands: Commands,
@@ -291,6 +309,7 @@ pub fn player_hit_star(
     player_query: Query<&Transform, With<Player>>,
     star_query: Query<(Entity, &Transform), With<Star>>,
     asset_server: Res<AssetServer>,
+    mut score: ResMut<Score>,
 ) {
     if let Ok(player_transform) = player_query.get_single() {
         for (star_entity, star_transform) in star_query.iter() {
@@ -300,6 +319,7 @@ pub fn player_hit_star(
 
             if distance < PLAYER_SIZE / 2.0 + STAR_SIZE / 2.0 {
                 println!("Player hit star!");
+                score.value += 1;
                 let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
 
                 commands.spawn(AudioBundle {
@@ -310,5 +330,11 @@ pub fn player_hit_star(
                 commands.entity(star_entity).despawn();
             }
         }
+    }
+}
+
+pub fn update_score(score: Res<Score>) {
+    if score.is_changed() {
+        println!("Score: {}", score.value.to_string());
     }
 }
