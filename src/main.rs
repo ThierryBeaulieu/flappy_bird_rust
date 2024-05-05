@@ -1,3 +1,4 @@
+use bevy::app::AppExit;
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use rand::random;
@@ -34,6 +35,7 @@ fn main() {
         .add_systems(Update, spawn_stars_over_time)
         .add_systems(Update, tick_enemy_spawn_timer)
         .add_systems(Update, spawn_enemies_over_time)
+        .add_systems(Update, exit_game)
         .run()
 }
 
@@ -420,5 +422,14 @@ pub fn spawn_enemies_over_time(
                 direction: Vec2::new(random::<f32>(), random::<f32>()).normalize(),
             },
         ));
+    }
+}
+
+pub fn exit_game(
+    keyboard_input: Res<ButtonInput<KeyCode>>,
+    mut app_exit_event_writer: EventWriter<AppExit>,
+) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
+        app_exit_event_writer.send(AppExit);
     }
 }
