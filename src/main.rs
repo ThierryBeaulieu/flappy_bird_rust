@@ -6,6 +6,7 @@ pub const PLAYER_SIZE: f32 = 54.0; // This is the player sprite size
 pub const PLAYER_SPEED: f32 = 500.0;
 pub const NUMBER_OF_ENEMIES: usize = 4;
 pub const ENEMY_SPEED: f32 = 200.0;
+pub const ENEMY_SIZE: f32 = 64.0;
 
 fn main() {
     App::new()
@@ -142,5 +143,28 @@ pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Re
     for (mut transform, enemy) in enemy_query.iter_mut() {
         let direction = Vec3::new(enemy.direction.x, enemy.direction.y, 0.0);
         transform.translation += direction * ENEMY_SPEED * time.delta_seconds();
+    }
+}
+
+pub fn update_enemy_direction(
+    mut enemy_query: Query<(&mut Transform, &mut Enemy)>,
+    window_query: Query<&Window, With<PrimaryWindow>>,
+) {
+    let window = window_query.get_single().unwrap();
+
+    let half_enemy_size = ENEMY_SIZE / 2.0; // 32.0
+    let x_min = 0.0 + half_enemy_size;
+    let x_max = window.width() - half_enemy_size;
+    let y_min = 0.0 + half_enemy_size;
+    let y_max = window.height() - half_enemy_size;
+
+    for (transform, mut enemy) in enemy_query.iter_mut() {
+        let translation = transform.translation;
+        if translation.x < x_min || translation.x > x_max {
+            enemy.direction.x *= -1.0;
+        }
+        if translation.y < y_min || translation.y > y_max {
+            enemy.direction.y *= -1.0;
+        }
     }
 }
