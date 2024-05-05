@@ -1,4 +1,4 @@
-use crate::star::NUMBER_OF_STARS;
+use crate::game::star::NUMBER_OF_STARS;
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use rand::random;
