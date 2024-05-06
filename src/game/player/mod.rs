@@ -45,6 +45,7 @@ impl Plugin for PlayerPlugin {
                 (enemy_hit_player, player_hit_star)
                     .run_if(in_state(AppState::Game))
                     .run_if(in_state(SimulationState::Running)),
-            );
+            )
+            .add_systems(OnExit(AppState::Game), despawn_player);
     }
 }
