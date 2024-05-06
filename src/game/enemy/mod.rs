@@ -23,7 +23,7 @@ impl Plugin for EnemyPlugin {
             .init_resource::<EnemySpawnTimer>()
             // Startup
             .add_systems(Startup, spawn_enemies)
-            // Updatedate, enemy_movement)
+            // Update
             .add_systems(
                 Update,
                 (
@@ -33,8 +33,8 @@ impl Plugin for EnemyPlugin {
                     tick_enemy_spawn_timer,
                     spawn_enemies_over_time,
                 )
-                    .in_set(in_state(AppState::Game))
-                    .in_set(in_state(SimulationState::Running)),
+                    .run_if(in_state(AppState::Game))
+                    .run_if(in_state(SimulationState::Running)),
             );
     }
 }
