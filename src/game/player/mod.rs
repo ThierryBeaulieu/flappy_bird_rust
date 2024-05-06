@@ -24,7 +24,7 @@ impl Plugin for PlayerPlugin {
             // Configure System Sets
             .configure_sets(Update, MovementSystemSet.before(ConfinementSystemSet))
             // Startup Systems
-            .add_systems(Startup, spawn_player)
+            .add_systems(OnEnter(AppState::Game), spawn_player)
             // Systems
             .add_systems(
                 Update,
