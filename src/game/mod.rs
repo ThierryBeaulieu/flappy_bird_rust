@@ -13,6 +13,7 @@ use star::StarPlugin;
 use systems::*;
 
 use crate::events::GameOver;
+use crate::AppState;
 pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
@@ -23,7 +24,7 @@ impl Plugin for GamePlugin {
             .add_plugins(PlayerPlugin)
             .add_plugins(ScorePlugin)
             .add_plugins(StarPlugin)
-            .add_systems(Update, toggle_simulation);
+            .add_systems(Update, toggle_simulation.run_if(in_state(AppState::Game)));
     }
 }
 
