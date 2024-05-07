@@ -1,3 +1,7 @@
+mod components;
+mod styles;
+mod systems;
+
 use bevy::prelude::*;
 
 pub struct MainMenuPlugin;
