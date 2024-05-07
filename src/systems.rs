@@ -2,7 +2,7 @@ use bevy::app::AppExit;
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 
-use crate::{events::*, AppState};
+use crate::{events::*, game::SimulationState, AppState};
 
 pub fn spawn_camera(mut commands: Commands, window_query: Query<&Window, With<PrimaryWindow>>) {
     let window = window_query.get_single().unwrap();
@@ -57,6 +57,7 @@ pub fn transition_to_main_menu_state(
             AppState::Game => {}
             _ => {
                 commands.insert_resource(NextState(Some(AppState::MainMenu)));
+                commands.insert_resource(NextState(Some(SimulationState::Paused)));
                 println!("Entered AppState::MainMenu ");
             }
         }
