@@ -32,18 +32,26 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
         ))
         .with_children(|parent| {
             // Title
-            parent.spawn(NodeBundle {
-                style: Style {
-                    flex_direction: FlexDirection::Row,
-                    justify_content: JustifyContent::Center,
-                    align_items: AlignItems::Center,
-                    width: Val::Px(300.0),
-                    height: Val::Px(120.0),
+            parent
+                .spawn(NodeBundle {
+                    style: Style {
+                        flex_direction: FlexDirection::Row,
+                        justify_content: JustifyContent::Center,
+                        align_items: AlignItems::Center,
+                        width: Val::Px(300.0),
+                        height: Val::Px(120.0),
+                        ..default()
+                    },
                     ..default()
-                },
-                ..default()
-            });
-            // Play
+                })
+                .with_children(|parent| {
+                    // Image 1
+
+                    // Text
+
+                    // Image 2
+                });
+            // === Play Button ===
             parent
                 .spawn((
                     ButtonBundle {
