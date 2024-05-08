@@ -25,7 +25,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                     height: Val::Percent(100.0),
                     ..default()
                 },
-                background_color: Color::RED.into(),
+                background_color: Color::rgb(0.5, 0.5, 0.5).into(),
                 ..default()
             },
             MainMenu {},
@@ -68,7 +68,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                                 "Bevy Ball Game",
                                 TextStyle {
                                     font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                                    font_size: 32.0,
+                                    font_size: 64.0,
                                     color: Color::WHITE,
                                 },
                             )],
