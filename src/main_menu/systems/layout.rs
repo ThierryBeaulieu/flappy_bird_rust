@@ -33,14 +33,18 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
             // Title
 
             // Play
-            parent.spawn((
-                ButtonBundle {
-                    style: BUTTON_STYLE,
-                    background_color: NORMAL_BUTTON_COLOR.into(),
-                    ..default()
-                },
-                PlayButton {},
-            ));
+            parent
+                .spawn((
+                    ButtonBundle {
+                        style: BUTTON_STYLE,
+                        background_color: NORMAL_BUTTON_COLOR.into(),
+                        ..default()
+                    },
+                    PlayButton {},
+                ))
+                .with_children(|parent| {
+                    parent.spawn(TextBundle { ..default() });
+                });
             // Quit
         })
         .id();
