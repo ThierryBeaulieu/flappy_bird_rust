@@ -1,5 +1,4 @@
 use bevy::prelude::*;
-use bevy_inspector_egui::egui::Ui;
 
 use crate::main_menu::components::*;
 use crate::main_menu::styles::*;
@@ -63,6 +62,21 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                         ..default()
                     });
                     // Text
+                    parent.spawn(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection::new(
+                                "Bevy Ball Game",
+                                TextStyle {
+                                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                    font_size: 32.0,
+                                    color: Color::WHITE,
+                                },
+                            )],
+                            justify: JustifyText::Center,
+                            ..default()
+                        },
+                        ..default()
+                    });
 
                     // Image 2
                 });
