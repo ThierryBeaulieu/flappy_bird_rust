@@ -35,11 +35,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
             // Play
             parent.spawn((
                 ButtonBundle {
-                    style: Style {
-                        width: Val::Px(200.0),
-                        height: Val::Px(80.0),
-                        ..default()
-                    },
+                    style: BUTTON_STYLE,
                     background_color: NORMAL_BUTTON_COLOR.into(),
                     ..default()
                 },
