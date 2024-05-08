@@ -73,12 +73,28 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                                 },
                             )],
                             justify: JustifyText::Center,
+                            linebreak_behavior: bevy::text::BreakLineOn::NoWrap,
                             ..default()
                         },
                         ..default()
                     });
 
                     // Image 2
+                    parent.spawn(ImageBundle {
+                        style: Style {
+                            width: Val::Px(64.0),
+                            height: Val::Px(64.0),
+                            margin: UiRect::new(
+                                Val::Px(8.0),
+                                Val::Px(8.0),
+                                Val::Px(8.0),
+                                Val::Px(8.0),
+                            ),
+                            ..default()
+                        },
+                        image: asset_server.load("sprites/ball_red_large.png").into(),
+                        ..default()
+                    });
                 });
             // === Play Button ===
             parent
