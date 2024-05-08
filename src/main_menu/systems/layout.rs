@@ -1,4 +1,3 @@
-use bevy::a11y::accesskit::TextAlign;
 use bevy::prelude::*;
 
 use crate::main_menu::components::*;
