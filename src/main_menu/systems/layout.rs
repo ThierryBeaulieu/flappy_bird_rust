@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 use crate::main_menu::components::*;
+use crate::main_menu::styles::*;
 
 pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
     let main_menu_entity = build_main_menu(&mut commands, &asset_server);
@@ -39,7 +40,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                         height: Val::Px(80.0),
                         ..default()
                     },
-                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    background_color: NORMAL_BUTTON_COLOR.into(),
                     ..default()
                 },
                 PlayButton {},
