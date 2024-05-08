@@ -1,3 +1,4 @@
+use bevy::a11y::accesskit::TextAlign;
 use bevy::prelude::*;
 
 use crate::main_menu::components::*;
@@ -43,7 +44,21 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                     PlayButton {},
                 ))
                 .with_children(|parent| {
-                    parent.spawn(TextBundle { ..default() });
+                    parent.spawn(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection::new(
+                                "Play",
+                                TextStyle {
+                                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                    font_size: 32.0,
+                                    color: Color::WHITE,
+                                },
+                            )],
+                            justify: JustifyText::Center,
+                            ..Default::default()
+                        },
+                        ..default()
+                    });
                 });
             // Quit
         })
