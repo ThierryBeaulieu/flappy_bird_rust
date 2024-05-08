@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::main_menu::components::MainMenu;
+use crate::main_menu::components::*;
 
 pub fn spawn_main_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
     let main_menu_entity = build_main_menu(&mut commands, &asset_server);
@@ -17,6 +17,8 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
         .spawn((
             NodeBundle {
                 style: Style {
+                    flex_direction: FlexDirection::Column,
+                    justify_content: JustifyContent::Center,
                     width: Val::Percent(100.0),
                     height: Val::Percent(100.0),
                     ..default()
@@ -26,6 +28,24 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
             },
             MainMenu {},
         ))
+        .with_children(|parent| {
+            // Title
+
+            // Play
+            parent.spawn((
+                ButtonBundle {
+                    style: Style {
+                        width: Val::Px(200.0),
+                        height: Val::Px(80.0),
+                        ..default()
+                    },
+                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    ..default()
+                },
+                PlayButton {},
+            ));
+            // Quit
+        })
         .id();
 
     main_menu_entity
