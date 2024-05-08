@@ -20,6 +20,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                 style: Style {
                     flex_direction: FlexDirection::Column,
                     justify_content: JustifyContent::Center,
+                    align_items: AlignItems::Center,
                     width: Val::Percent(100.0),
                     height: Val::Percent(100.0),
                     ..default()
