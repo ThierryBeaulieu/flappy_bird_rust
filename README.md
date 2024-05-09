@@ -11,3 +11,19 @@ rust version of flappy bird using the bevy engine
 - [ ] Regarder pour profiler la cache et la mémoire qu'utiliser Rust
 - [ ] Regarder ce qui est le bottle neck dans mon code live
 - [ ] Regarder pour le network avec Bevy
+
+
+## Travail pratique sur l'utilisation de Bevy
+
+## Implémenter la page principale
+
+<img src="Devoir/jeux.png"/>
+
+## Implémenter le menu final
+
+<img src="Devoir/menu_fin.png"/>
+
+## Implémenter le menu du jeux
+
+<img src="Devoir/Menu_pause.png"/>
+
