@@ -10,6 +10,7 @@ pub const BUTTON_STYLE: Style = {
     style.height = Val::Px(80.0);
     style.align_items = AlignItems::Center;
     style.justify_content = JustifyContent::Center;
+    style.margin = UiRect::new(Val::Px(0.0), Val::Px(0.0), Val::Px(8.0), Val::Px(8.0));
     style
 };
 
